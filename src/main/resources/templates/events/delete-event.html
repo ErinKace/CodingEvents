@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="container">
+<header><nav th:replace="fragments :: navigation"></nav></header>
+
+<form method="post">
+
+        <th:block th:each="event : ${events}">
+            <div class="form-group">
+            <label>
+                <span th:text="${event.name}"></span>
+                <input type="checkbox" name="eventIds" th:value="${event.id}" class="form-control"/>
+            </label>
+            </div>
+        </th:block>
+
+    <input type="submit" value="Delete" class="btn btn-danger"/>
+</form>
+
+
+</body>
+</html>
