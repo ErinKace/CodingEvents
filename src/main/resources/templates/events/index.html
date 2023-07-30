@@ -17,6 +17,9 @@
             <td th:text="${event.description}"></td>
             <td><span th:replace="fragments :: default-address"></span></td>
             <td th:text="${event.id}"></td>
+            <td>
+                <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+            </td>
             <td><img th:src="@{/Images/Placeholder.png}"></td>
         </tr>
     </th:block>
