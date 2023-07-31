@@ -4,7 +4,7 @@
 <body>
 <h1 th:text="${title}">Edit Event</h1>
 <header><nav th:replace="fragments :: navigation"></nav></header>
-<form method="post" action="/events/create">
+<form method="post" action="/events/edit">
     <div class="form-group">
         <label>Event Name
             <input type="text" name="name" class="form-control" th:value="${currentEvent.name}"/>
