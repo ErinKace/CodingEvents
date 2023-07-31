@@ -8,15 +8,16 @@ public class Event {
     private int id;
     private static int nextId=1;
 
-    public Event(String name) {
+    public Event(String name, String description) {
         this.id = nextId;
         this.nextId++;
         this.name = name;
-    }
-    public Event(String name, String description) {
-        this(name);
         this.description = description;
     }
+//    public Event(String name, String description) {
+//        this(name);
+//        this.description = description;
+//    }
 
     public String getName() {
         return name;
