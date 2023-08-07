@@ -1,11 +1,15 @@
 package org.launchcode.codingevents.controllers;
 
+import org.attoparser.trace.MarkupTraceEvent;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +27,17 @@ public class EventController {
         return "events/index";
     }
     @GetMapping("create")
-    public String renderCreateEventForms() {
+    public String renderCreateEventForms(Model model) {
+        model.addAttribute(new Event());
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+//        if (errors.hasErrors()) {
+//            model.addAttribute("errorMsg", "Check the errors above and try again.");
+//            return "events/create";
+//        }
         EventData.addEvent(newEvent);
         return "redirect:";
     }

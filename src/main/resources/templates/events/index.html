@@ -9,13 +9,22 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Email Address</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th>ID</th>
     </tr>
     </thead>
     <th:block th:each="event : ${events}">
         <tr>
             <td th:text="${event.name}"></td>
             <td th:text="${event.description}"></td>
-            <td><span th:replace="fragments :: default-address"></span></td>
+            <td th:text="${event.eventDate}"></td>
+            <td th:text="${event.contactEmail}"></td>
+            <td th:text="${event.location}"></td>
+            <td th:text="${event.type.displayName}"></td>
             <td th:text="${event.id}"></td>
             <td>
                 <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
