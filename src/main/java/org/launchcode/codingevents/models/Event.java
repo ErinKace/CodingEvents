@@ -1,10 +1,17 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class Event {
+    @Id
+    @GeneratedValue
+    private int id;
     @NotBlank
     @Size(min=3,max=50, message="Name must be between 3 and 50 characters")
     private String name;
@@ -23,11 +30,8 @@ public class Event {
     @Future(message="Event must be a future date")
     private LocalDate eventDate;
     private EventType type;
-    private int id;
-    private static int nextId=1;
 
     public Event(String name, String description, String contactEmail, String location, Boolean mustRegister, Integer numAttendees, LocalDate eventDate, EventType eventType) {
-        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
@@ -38,8 +42,6 @@ public class Event {
         this.type = eventType;
     }
     public Event() {
-        this.id = nextId;
-        this.nextId++;
     }
 //    public Event(String name, String description) {
 //        this(name);
