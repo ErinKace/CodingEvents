@@ -10,13 +10,17 @@
 <header th:replace="fragments :: header"></header>
 <form method="POST" action="/eventCategories/create">
     <div class="form-group">
-        <label>Category
-            <input th:field="${eventCategory.name}" class="form-control"/>
+        <input type="hidden" th:value="${event.id}" th:field="${eventTag.event}"/>
+        <label>Tags
+            <select th:field="${eventTag}">
+                <option th:each="tag :: ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+            </select>
         </label>
     </div>
     <div class="form-group">
-        <input type="submit" value="Create Category" class="btn btn-success"/>
+        <input type="submit" value="Add Tag" class="btn btn-success"/>
     </div>
 </form>
+
 </body>
 </html>

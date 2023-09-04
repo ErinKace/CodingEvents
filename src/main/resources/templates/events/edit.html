@@ -2,8 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1 th:text="${title}">Edit Event</h1>
-<header><nav th:replace="fragments :: navigation"></nav></header>
+<header th:replace="fragments :: header"></header>
 <form method="post" action="/events/edit">
     <div class="form-group">
         <label>Event Name
