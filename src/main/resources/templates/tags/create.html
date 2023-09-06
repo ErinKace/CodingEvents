@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 <header th:replace="fragments :: header"></header>
-
+<form method="POST" action="/tags/create">
+    <div class="form-group">
+        <label>Category
+            <input th:field="${tag.name}" class="form-control"/>
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create Tag" class="btn btn-success"/>
+    </div>
+</form>
 </body>
 </html>

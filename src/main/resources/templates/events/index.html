@@ -9,7 +9,7 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Date</th>
+<!--        <th>Date</th>-->
         <th>Email Address</th>
         <th>Location</th>
         <th>Category</th>
@@ -18,9 +18,9 @@
     </thead>
     <th:block th:each="event : ${events}">
         <tr>
-            <td th:text="${event.name}"></td>
+            <td ><a th:href="'/events/details?eventId='+${event.id}"><span th:text="${event.name}"></span></a></td>
             <td th:text="${event.eventDetails.description}"></td>
-            <td th:text="${event.eventDetails.eventDate}"></td>
+<!--            <td th:text="${event.eventDetails.eventDate}"></td>-->
             <td th:text="${event.eventDetails.contactEmail}"></td>
             <td th:text="${event.eventDetails.location}"></td>
             <td th:text="${event.eventCategory.name}"></td>
@@ -28,7 +28,8 @@
             <td>
                 <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
             </td>
-            <td><img th:src="@{/Images/Placeholder.png}"></td>
+
+<!--            <td><img th:src="@{/Images/Placeholder.png}"></td>-->
         </tr>
     </th:block>
 

@@ -46,6 +46,7 @@ public class EventController {
                 model.addAttribute("events", category.getEvents());
             }
         }
+        model.addAttribute("title", "All Events");
         return "events/index";
     }
     @GetMapping("create")
@@ -103,21 +104,36 @@ public class EventController {
         Event event = result.get();
         model.addAttribute("title", "Add Tag to "+event.getName());
         model.addAttribute("tags",tagRepository.findAll());
-        model.addAttribute("event", event);
-        model.addAttribute("eventTag", new EventTagDTO());
+        EventTagDTO eventTag = new EventTagDTO();
+        eventTag.setEvent(event);
+        model.addAttribute("eventTag", eventTag);
         return "events/add-tag.html";
     }
     @PostMapping("add-tag")
     public String processAddTagForm(@ModelAttribute @Valid EventTagDTO eventTag, Errors errors, Model model) {
+        Event event = eventTag.getEvent();
+        Tag tag = eventTag.getTag();
         if (!errors.hasErrors()) {
-            Event event = eventTag.getEvent();
-            Tag tag = eventTag.getTag();
             if (!event.getTags().contains(tag)) {
                 event.addTag(tag);
                 eventRepository.save(event);
             }
-            return "redirect:";
+            return "redirect:details?eventId="+event.getId();
         }
-        return "redirect:add-tag";
+        return "redirect:add-tag?eventId="+event.getId();
+    }
+    @GetMapping("details")
+    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
+        Optional<Event> result = eventRepository.findById(eventId);
+        if (result.isEmpty()) {
+            model.addAttribute("title", "No Such Event");
+            return "redirect:";
+        } else {
+            Event event = result.get();
+            model.addAttribute("title", event.getName());
+            model.addAttribute("event", event);
+            model.addAttribute("tags", event.getTags());
+        }
+        return "events/details";
     }
 }
